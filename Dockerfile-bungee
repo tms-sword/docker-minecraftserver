@@ -1,0 +1,11 @@
+
+# --file Dockerfile-bungee -t "asia.gcr.io/tmssword/bungeeimages:latest" .
+# --file Dockerfile-lobby -t "asia.gcr.io/tmssword/lobbyimages:latest" .
+FROM asia.gcr.io/tmssword/tms:latest
+
+ENV BUCKET_URI "${BUCKET_BASE}lobby-static/"
+ENV BOOTJAR "Bungeecord.jar"
+ENV JAR_MEM "256m"
+EXPOSE 25588
+
+CMD  gsutil cp gs://${BUCKET_BASE}container-start.bash /usr/bin/ && chmod 777 /usr/bin/container-start.bash && /usr/bin/container-start.bash
